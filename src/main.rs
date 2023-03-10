@@ -6,7 +6,7 @@ use esp_idf_hal::peripherals::Peripherals;
 fn main()
 {
     let peripherals = Peripherals::take().unwrap();
-    let mut led = PinDriver::output(peripherals.pins.gpio9).unwrap();
+    let mut led = PinDriver::output(peripherals.pins.gpio5).unwrap();
 
 
     loop {
