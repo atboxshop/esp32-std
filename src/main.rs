@@ -13,8 +13,8 @@ fn main()
     let peripherals = Peripherals::take().unwrap();
 
     let mut adc = AdcDriver::new(peripherals.adc2, &Config::new().calibration(true)).unwrap();
-    let mut adc_pin: esp_idf_hal::adc::AdcChannelDriver<'_, Gpio13, Atten11dB<_>> =
-        AdcChannelDriver::new(peripherals.pins.gpio13).unwrap();       
+    let mut adc_pin: esp_idf_hal::adc::AdcChannelDriver<'_, Gpio12, Atten11dB<_>> =
+        AdcChannelDriver::new(peripherals.pins.gpio12).unwrap();       
 
     loop {
         sleep(Duration::from_millis(20));
