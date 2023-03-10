@@ -5,5 +5,7 @@ fn main() {
     // implemented by esp-idf-sys might not link properly. See https://github.com/esp-rs/esp-idf-template/issues/71
     esp_idf_sys::link_patches();
 
-    println!("Hello, world!");
+    loop{
+        println!("Hello, world!");
+    }
 }
