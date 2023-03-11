@@ -6,8 +6,6 @@ use esp_idf_hal::gpio::*;
 use esp_idf_hal::adc::config::Config;
 use esp_idf_hal::peripherals::Peripherals;
 
-
-
 fn main()
 {
     let peripherals = Peripherals::take().unwrap();
