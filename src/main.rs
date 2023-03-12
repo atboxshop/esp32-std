@@ -1,23 +1,23 @@
 use esp_idf_sys as _; // If using the `binstart` feature of `esp-idf-sys`, always keep this module imported
-use esp_idf_hal::delay::FreeRtos;
+use std::thread::sleep;
+use std::time::Duration;
+use esp_idf_hal::adc::*;
 use esp_idf_hal::gpio::*;
+use esp_idf_hal::adc::config::Config;
 use esp_idf_hal::peripherals::Peripherals;
 
 fn main()
 {
     let peripherals = Peripherals::take().unwrap();
-    let mut led = PinDriver::output(peripherals.pins.gpio5).unwrap();
-    let mut led2 = PinDriver::output(peripherals.pins.gpio2).unwrap();
 
+    let mut adc = AdcDriver::new(peripherals.adc2, &Config::new().calibration(true)).unwrap();
+    let mut adc_pin: esp_idf_hal::adc::AdcChannelDriver<'_, Gpio12, Atten11dB<_>> =
+        AdcChannelDriver::new(peripherals.pins.gpio12).unwrap();       
 
-    loop{
-        led.set_high().unwrap();
-        led2.set_high().unwrap();
-        // we are sleeping here to make sure the watchdog isn't triggered
-        FreeRtos::delay_ms(200);
-        led.set_low().unwrap();
-        led2.set_low().unwrap();
-        FreeRtos::delay_ms(200);
-        println!("Hello World!");
+    loop {
+        sleep(Duration::from_millis(20));
+        let value1 = adc.read(&mut adc_pin).unwrap();
+        let value2:f32 = value1.into();
+        println!("ADC value: {} vols", value2/1000.00);
    }
 }
