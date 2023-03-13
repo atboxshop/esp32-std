@@ -23,7 +23,7 @@ fn main()
     ).unwrap();
 
     wifi_driver.set_configuration(&Configuration::Client(ClientConfiguration{
-        ssid: "FTW123".into(),
+        ssid: "FTW123_Plus".into(),
         password: "hongphat0106".into(),
         ..Default::default()
     })).unwrap();
